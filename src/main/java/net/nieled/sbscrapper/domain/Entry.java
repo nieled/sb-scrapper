@@ -1,5 +1,7 @@
 package net.nieled.sbscrapper.domain;
 
+import java.util.Objects;
+
 public class Entry {
     private int orderNo;
     private String title;
@@ -43,6 +45,22 @@ public class Entry {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entry entry = (Entry) o;
+        return orderNo == entry.orderNo &&
+                comments == entry.comments &&
+                points == entry.points &&
+                Objects.equals(title, entry.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderNo, title, comments, points);
     }
 
     @Override
